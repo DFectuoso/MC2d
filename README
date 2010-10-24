@@ -18,9 +18,9 @@ If that happens, i will care about trees, and allow to craft stuff.
 
 Lets go!
 
-Step 1: Make a canvas that takes all the screen.
-Step 2: Create a Map object, it has a 2*2 matrix
-Step 3: Render a couple of types of tiles in the screen.
+[DONE] Step 1: Make a canvas that takes all the screen.
+[DONE] Step 2: Create a Map object, it has a 2*2 matrix
+[DONE] Step 3: Render a couple of types of tiles in the screen.
 Step 4: Create a Player object
 Step 5: Make him appear on the screen.
 Step 6: He can move(WASP and arrows)

@@ -7,9 +7,11 @@ var ENTER_KEY= false;
 
 var canvas;
 var map;
+var player;
 
 $(document).ready(function () {
   map = new Map(new Sprite('textures.png'));
+  player = new Player();
 
   preloadImages.onComplete = function(){
     startGame();
@@ -34,6 +36,7 @@ function processGame(){
   canvas.fillColor("rgb(118,207,198)");
   canvas.fillRect(0,0,$(window).width(),$(window).height());
   map.draw();
+  player.draw();
 
 //  if(LEFT_KEY) sprite.x = sprite.x - 1;
 //  if(RIGHT_KEY) sprite.x = sprite.x + 1;
