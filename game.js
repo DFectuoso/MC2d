@@ -33,7 +33,7 @@ function startGame(){
 }
 
 function processGame(){
-  canvas.fillColor("rgb(118,207,198)");
+  canvas.fillColor("rgb(118,173,246)");
   canvas.fillRect(0,0,$(window).width(),$(window).height());
   map.draw();
   player.draw();
