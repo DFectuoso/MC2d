@@ -1,19 +1,82 @@
+var HORIZONTAL_MOVE = 10;
+var PLAYER_RECT_WIDTH = 24;
+var PLAYER_RECT_HEIGHT= 118;;
+var deltaHead = 3; 
+var deltaArm = 8;
 function Player(){
-  this.x = 100;
-  this.y = 100;
+
+  this.jumpingTimer = "";
+  this.velY = 0;
+  this.acelY = 5;
+  this.x = 128;
+  this.y = 128;
   this.img = new Image();
   this.img.src = "char.png";
   this.lookingRight = true;
 
   preloadImages.queue_images([this.img.src]);
 
+  this.getRect = function(x,y){
+    if(x==null) x = this.x;
+    if(y==null) y = this.y;
+    return new Rect(x + deltaHead,y,PLAYER_RECT_WIDTH,PLAYER_RECT_HEIGHT);
+  }
+
+  this.fall = function(map){
+    if (this.jumpingTimer == "") return;
+    this.velY -= this.acelY;
+    var tempY = this.y - this.velY; 
+
+    if (map.collideBottom(this.getRect(this.x,tempY))) {
+      while(!map.collideBottom(this.getRect(this.x,this.y+1))){
+        this.y++;
+      }
+      this.jumpingTimer = "";
+      return;
+    }
+
+    if (!map.collide(this.getRect(this.x,tempY))) {
+      this.y = tempY;
+    }
+  }
+
+  this.jump = function(){
+    if (this.jumpingTimer == ""){
+      this.jumpingTimer = new Date().getTime();
+      this.velY = 30;//30
+    } else {
+      var delta = new Date().getTime() - this.jumpingTimer;
+      this.velY += Math.max(0,(5 - (delta/100))/2)
+    }
+  }
+
+  this.moveLeft = function(){
+    this.lookingRight = false;
+    if(!map.collide(this.getRect(this.x - HORIZONTAL_MOVE,this.y))){
+      this.x -= HORIZONTAL_MOVE;
+      if(!map.collideBottom(this.getRect(this.x,this.y+1)) && this.jumpingTimer == ""){
+         this.velY = 8;
+         this.jumpingTimer = new Date().getTime();
+      }
+    }
+  }
+
+  this.moveRight = function(){
+    this.lookingRight = true;
+    if(!map.collide(this.getRect(this.x + HORIZONTAL_MOVE,this.y))){
+      this.x += HORIZONTAL_MOVE;
+       if(!map.collideBottom(this.getRect(this.x,this.y+1)) && this.jumpingTimer == ""){
+         this.velY = 8;
+         this.jumpingTimer = new Date().getTime();
+       }
+    }
+  }
+
   this.draw = function(){
     var sxHead, syHead, widthHead, heightHead;
     var sxBody, syBody, widthBody, heightBody;
     var sxArm, syArm, widthArm, heightArm;
     var sxLegs, syLegs, widthLegs, heightLegs;
-    var deltaHead = 3; 
-    var deltaArm = 8;
     if (this.lookingRight){
       sxHead = 0;
       syHead = 8;

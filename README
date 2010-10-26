@@ -21,11 +21,11 @@ Lets go!
 [DONE] Step 1: Make a canvas that takes all the screen.
 [DONE] Step 2: Create a Map object, it has a 2*2 matrix
 [DONE] Step 3: Render a couple of types of tiles in the screen.
-Step 4: Create a Player object
-Step 5: Make him appear on the screen.
-Step 6: He can move(WASP and arrows)
-Step 7: He can jump
-Step 8: He can detect collision and stop jumping
+[DONW] Step 4: Create a Player object
+[DONE] Step 5: Make him appear on the screen.
+[DONE] Step 6: He can move(WASP and arrows)
+[DONE] Step 7: He can jump
+[DONE] Step 8: He can detect collision and stop jumping
 Step 9: Scroll the map when he gets to a limit
 Step 10: He can point
 Step 11: He can delete
@@ -36,3 +36,8 @@ Step 13: Rest, sleep, this was a crazy day.
 Weekend before TIGJam, I am going to start to get ready, get my mind clear and know exactly what i want to do.
 I will use the default texture pack from Minecraft, but I want a 64*64 tile size instead of 16*16. That is 4 times bigger.
 I want to use the same file, so i am going to play with images and sprites today, try to make a nice experiment to be ready on Thursday on how to start with canvas and images
+
+Monday before the TIGJam
+I have a basic plataformer(the player can move and jump, small map(the size of the screen) and the movement is not perfect but good enought. 
+I am starting to wonder if I should just do a simple Creeper-controller Sssssss game instead of a full sandbox type game, it is incredibles ammount of work
+Lets see what my mind decides on the week. Tomorrow is big bike ride day so not much programming, maybe i'll get some of the scroll ready but who knows

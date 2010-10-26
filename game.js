@@ -23,6 +23,13 @@ function ResizeCanvas() {
   $("canvas").attr("width", $(window).width());
 }
 
+function Rect(x,y,width,height){
+  this.x = x;
+  this.y = y;
+  this.height = height;
+  this.width = width;
+}
+
 function startGame(){
     ResizeCanvas();
     $(window).resize(ResizeCanvas); 
@@ -32,15 +39,30 @@ function startGame(){
     processGame();
 }
 
-function processGame(){
+function drawBlueSky(){
   canvas.fillColor("rgb(118,173,246)");
   canvas.fillRect(0,0,$(window).width(),$(window).height());
+}
+
+function move(){
+  player.fall(map);
+}
+
+function draw(){
+  drawBlueSky();
   map.draw();
   player.draw();
+}
 
-//  if(LEFT_KEY) sprite.x = sprite.x - 1;
-//  if(RIGHT_KEY) sprite.x = sprite.x + 1;
-//  if(UP_KEY) sprite.y = sprite.y - 1;
-//  if(DOWN_KEY) sprite.y = sprite.y +1;
+function controls(){
+  if(UP_KEY) player.jump();
+  if(RIGHT_KEY) player.moveRight();
+  if(LEFT_KEY) player.moveLeft();
+}
+
+function processGame(){
+  move();
+  controls();
+  draw();
   setTimeout("processGame();", 66);
 }
