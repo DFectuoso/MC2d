@@ -10,7 +10,7 @@ var map;
 var player;
 
 $(document).ready(function () {
-  map = new Map(new Sprite('textures.png'));
+  map = new Map(new Sprite('textures.png'), $(window).width(), $(window).height());
   player = new Player();
 
   preloadImages.onComplete = function(){
@@ -21,6 +21,9 @@ $(document).ready(function () {
 function ResizeCanvas() {
   $("canvas").attr("height", $(window).height());
   $("canvas").attr("width", $(window).width());
+  map.screenSizeY = $(window).height();
+  map.screenSizeX = $(window).width();
+  map.checkCamaraLimits();
 }
 
 function Rect(x,y,width,height){
@@ -46,12 +49,13 @@ function drawBlueSky(){
 
 function move(){
   player.fall(map);
+  map.moveCamaraForPlayerMoveTo(player.x,player.y);
 }
 
 function draw(){
   drawBlueSky();
   map.draw();
-  player.draw();
+  player.draw(map.screenX,map.screenY);
 }
 
 function controls(){

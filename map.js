@@ -1,25 +1,47 @@
-function Map(sprite){
+var MAP_WIDTH = 25;
+var MAP_HEIGHT = 31;
+
+function Map(sprite, screenSizeX,screenSizeY){
+  this.screenX = 0;
+  this.screenY = 0;
+  this.screenSizeX = screenSizeX;
+  this.screenSizeY = screenSizeY;
   this.sprite = sprite;
 
-  this.mapArray = [
-    [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
-    [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
-    [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
-    [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
-    [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
-    [ 3, 3, 3,-1,-1,-1,-1,-1,-1,-1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-    [ 2, 2, 2, 3, 3,-1,-1,-1,-1, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-    [ 2, 2, 2, 2, 2, 3, 3,-1, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-    [ 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-    [ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-    [ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-  ]
+  this.generateMap = function(){
+    var map = new Array();
+    for(var i = 0; i < MAP_HEIGHT; i++){
+      var mapRow = new Array();
+      for(var j = 0; j < MAP_WIDTH; j++){
+        mapRow[j] = (i < MAP_HEIGHT / 2 || (j + (i%2)) %2 == 0)?-1:3;
+      }
+      map[i] = mapRow;
+    }
+    return map;
+  }
+
+  this.mapArray = this.generateMap();
+  this.checkCamaraLimits = function(){
+    if(this.screenX < 0) this.screenX = 0;
+    if(this.screenY < 0) this.screenY = 0;
+    if(this.screenX + this.screenSizeX > this.mapArray[0].length * 64) this.screenX = this.mapArray[0].length*64 - this.screenSizeX;
+    if(this.screenY + this.screenSizeY > this.mapArray.length * 64) this.screenY = this.mapArray.length*64 - this.screenSizeY;
+  }
+
+
+  this.checkCamaraLimits();
 
   this.draw = function(){
-    for(var i = 0; i < this.mapArray.length; i++){
-      for (var j = 0; j < this.mapArray[i].length; j++){
+    var firstTileLeft = Math.floor(this.screenX/64); 
+    var firstTileTop  = Math.floor(this.screenY/64); 
+
+    var lastTileRight  = Math.ceil((this.screenX + this.screenSizeX)/64); 
+    var lastTileBottom = Math.ceil((this.screenY + this.screenSizeY)/64); 
+
+    for(var i = firstTileTop; i < lastTileBottom; i++){
+      for (var j = firstTileLeft; j < lastTileRight; j++){
         if(this.mapArray[i][j] != -1)
-          this.sprite.draw(this.mapArray[i][j], j * 64, i * 64);
+          this.sprite.draw(this.mapArray[i][j], (j - firstTileLeft) * 64 - this.screenX % 64, (i - firstTileTop) * 64 - this.screenY % 64);
       }
     }
   }; 
@@ -53,7 +75,17 @@ function Map(sprite){
     if(this.mapArray[bottomY][rightX] != -1) return true; 
     return false;
   }
-
-
-
+  
+  this.moveCamaraForPlayerMoveTo = function(x,y){
+    var deltaX = x - this.screenX;
+    var deltaY = y - this.screenY;
+    var percentajeX = deltaX/this.screenSizeX * 100;
+    var percentajeY = deltaY/this.screenSizeY * 100;
+    if(percentajeX < 30) this.screenX = this.screenX - 5;
+    if(percentajeX > 70) this.screenX = this.screenX + 5;
+    if(percentajeY < 30) this.screenY = this.screenY - 5;
+    if(percentajeY > 70) this.screenY = this.screenY + 5;
+    this.checkCamaraLimits();
+  }
 }
+
