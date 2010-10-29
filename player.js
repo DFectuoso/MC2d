@@ -8,13 +8,36 @@ function Player(){
   this.jumpingTimer = "";
   this.velY = 0;
   this.acelY = 5;
-  this.x = 128;
+  this.x = 528;
   this.y = 128;
   this.img = new Image();
   this.img.src = "char.png";
   this.lookingRight = true;
 
   preloadImages.queue_images([this.img.src]);
+
+  this.leftClick = function(){
+    var screenReadyX = this.x - screenX;
+    var screenReadyY = this.y - screenY; 
+    var widthArm =  4;
+    var heightHead = 10;
+    var armXOrigin = screenReadyX + deltaArm + deltaHead + widthArm;
+    var armYOrigin = screenReadyY + heightHead * 4 + deltaArm;
+    
+    var angle = Math.atan2(armYOrigin - mousey,armXOrigin - mousex) * 180/Math.PI;
+    console.log(angle)
+    if (angle>0 && angle < 90)
+      map.mapArray[Math.floor(this.y/64)][Math.floor(this.x/64) - 1] = 3; 
+    if (angle>90 && angle < 180)
+      map.mapArray[Math.floor(this.y/64)][Math.floor(this.x/64) + 1] = 3; 
+    if (angle<0 && angle > -90)
+      map.mapArray[Math.floor(this.y/64) + 1][Math.floor(this.x/64) - 1] = 3; 
+    if (angle<-90 && angle > -180)
+      map.mapArray[Math.floor(this.y/64) + 1][Math.floor(this.x/64) + 1] = 3; 
+    // Get the nearest thing, outside of us, that we are position
+    // if its not 3
+    // MAKE THAT B#@!#@! 3
+  }
 
   this.getRect = function(x,y){
     if(x==null) x = this.x;
@@ -125,10 +148,18 @@ function Player(){
     canvas.drawImage(this.img, sxHead, syHead, widthHead, heightHead,screenReadyX,screenReadyY,widthHead * 4,heightHead * 4);
     // body
     canvas.drawImage(this.img, sxBody, syBody, widthBody, heightBody,screenReadyX + deltaHead,screenReadyY + heightHead * 4,widthBody * 4,heightBody * 4);
-    // arm
-    canvas.drawImage(this.img, sxArm, syArm, widthArm, heightArm,screenReadyX + deltaArm + deltaHead,screenReadyY + heightHead * 4 + deltaArm,widthArm * 4,heightArm * 4);
-    // legs
+   // legs
     canvas.drawImage(this.img, sxLegs, syLegs, widthLegs, heightLegs,screenReadyX + deltaHead,screenReadyY + heightHead * 4 + heightBody * 4,widthLegs * 4,heightLegs * 4);
+    // arm
 
+    var armXOrigin = screenReadyX + deltaArm + deltaHead + widthArm;
+    var armYOrigin = screenReadyY + heightHead * 4 + deltaArm;
+    var angle = Math.atan2(armYOrigin - mousey,armXOrigin - mousex);
+    var m1 = Matrix().translate(armXOrigin,armYOrigin).rotate(angle).rotate(Math.PI/2);
+    var self = this;
+    canvas.withTransform(m1, function(){
+      canvas.drawImage(self.img, sxArm, syArm, widthArm, heightArm,-widthArm,0,widthArm * 4,heightArm * 4);
+    });
+ 
   }; 
 }

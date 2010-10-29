@@ -4,6 +4,8 @@ var RIGHT_KEY = false;
 var UP_KEY = false;
 var DOWN_KEY = false;
 var ENTER_KEY= false;
+var mousex = 0;
+var mousey = 0;
 
 var canvas;
 var map;
@@ -39,6 +41,8 @@ function startGame(){
     canvas = $("canvas").powerCanvas();
     document.onkeyup  = controlsUp;
     document.onkeydown  = controlsDown;
+    document.onmousedown = mouseClick;
+    document.onmousemove = mouseMove;
     processGame();
 }
 

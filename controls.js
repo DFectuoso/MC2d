@@ -48,3 +48,19 @@ var controlsDown = function(ev) {
       break;
   }
 }
+
+// Simple funtion to store the mouseMove into 2 global variables
+function mouseMove(ev){ 
+ // Get the mouse position relative to the canvas element.
+  if (ev.layerX || ev.layerX == 0) { // Firefox
+    mousex = ev.layerX;
+    mousey = ev.layerY;
+  } else if (ev.offsetX || ev.offsetX == 0) { // Opera
+    mousex = ev.offsetX;
+    mousey = ev.offsetY;
+  }
+}
+
+function mouseClick(ev){
+ player.leftClick(); 
+}

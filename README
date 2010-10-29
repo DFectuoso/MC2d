@@ -26,7 +26,7 @@ Lets go!
 [DONE] Step 6: He can move(WASP and arrows)
 [DONE] Step 7: He can jump
 [DONE] Step 8: He can detect collision and stop jumping
-Step 9: Scroll the map when he gets to a limit
+[DONe] Step 9: Scroll the map when he gets to a limit
 Step 10: He can point
 Step 11: He can delete
 Step 12: He can put blocks
@@ -41,3 +41,48 @@ Monday before the TIGJam
 I have a basic plataformer(the player can move and jump, small map(the size of the screen) and the movement is not perfect but good enought. 
 I am starting to wonder if I should just do a simple Creeper-controller Sssssss game instead of a full sandbox type game, it is incredibles ammount of work
 Lets see what my mind decides on the week. Tomorrow is big bike ride day so not much programming, maybe i'll get some of the scroll ready but who knows
+
+
+=====
+Got to the TIGJam, and found pixie has a new IDE, which is cool, but I will have to rewrite everything and learn coffee script. Its probably going to be worth it, at least day 1.
+So Day 1 TIGJam = Learn how to use Pixie and start on step 1 again
+=> [DONE] Render 1 tile
+-> [DONW] Hardcode a map data matrix 
+-> [DONW] Send that matrix to a map object that turns them into chunks
+-> [DONE] Inside of the chunks, you have tile objects
+-> [DONE] It can draw them.
+-> Add a player
+-> You can move
+-> You can detect collisions
+-> You can move, detect collisions and move the camara
+-> Use a automata to generate map
+-> The map on top should be mostly land
+
+-==== Pixie str6 IDE is awesome. but i don't feel confortable with it, there are more odds of me doing something playable with the original stack/code so i'll continue with it.
+Night of the first day: Back to work.
+
+I Have many thing to do, generate a cool map, test a biger map (and maybe add collisions only on some things close to me). Refactor the Screen to be awesome/better.
+Adding the hability to point, put and remove.
+And then think about big thinks
+
+My Todo list now:
+-> Make a Bigger Bigger map, like a big stair, check if its working allright
+-> IF its not slow(hopefully) ill move to point, delete and create
+-> If its slow, i'll move to refactor
+
+Its 10:18 pm and only have like 2-3 more hours of energy so lets see what happens
+
+It is fast, so lets point, shoot and have fun!
+Lets add a on mouse move, thing, that will store mouseX and mouseY and call update position
+
+
+So Now I got the mouse set up, and the rotation... but the rotation using matrix.js needs to use translation for everything, so its time to refactor
+Now it working, and almost everyone has left, 11:27 and there < 5 people in the JAM
+
+Left the jam, with the hability to put tiles on left and right of the character, with the mouse, poiting. It feels like a sanbox, this is going to be an epic weekend.
+I need to refactor that so it looks in a line of where you are poiting, but man, its WORKING. You can build something, that is nice.
+
+
+
+
+

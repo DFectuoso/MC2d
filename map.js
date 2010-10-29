@@ -1,5 +1,5 @@
-var MAP_WIDTH = 25;
-var MAP_HEIGHT = 31;
+var MAP_WIDTH = 500;
+var MAP_HEIGHT = 500;
 
 function Map(sprite, screenSizeX,screenSizeY){
   this.screenX = 0;
@@ -13,7 +13,7 @@ function Map(sprite, screenSizeX,screenSizeY){
     for(var i = 0; i < MAP_HEIGHT; i++){
       var mapRow = new Array();
       for(var j = 0; j < MAP_WIDTH; j++){
-        mapRow[j] = (i < MAP_HEIGHT / 2 || (j + (i%2)) %2 == 0)?-1:3;
+        mapRow[j] = (i < j)?-1:3;
       }
       map[i] = mapRow;
     }
@@ -81,10 +81,10 @@ function Map(sprite, screenSizeX,screenSizeY){
     var deltaY = y - this.screenY;
     var percentajeX = deltaX/this.screenSizeX * 100;
     var percentajeY = deltaY/this.screenSizeY * 100;
-    if(percentajeX < 30) this.screenX = this.screenX - 5;
-    if(percentajeX > 70) this.screenX = this.screenX + 5;
-    if(percentajeY < 30) this.screenY = this.screenY - 5;
-    if(percentajeY > 70) this.screenY = this.screenY + 5;
+    if(percentajeX < 30) this.screenX = this.screenX - 17;
+    if(percentajeX > 70) this.screenX = this.screenX + 17;
+    if(percentajeY < 30) this.screenY = this.screenY - 17;
+    if(percentajeY > 70) this.screenY = this.screenY + 17;
     this.checkCamaraLimits();
   }
 }
