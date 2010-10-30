@@ -55,6 +55,10 @@ function Player(){
         break;
       }
     }
+    if(!map.collideBottom(this.getRect(this.x,this.y+1)) && this.jumpingTimer == ""){
+      this.velY = 8;
+      this.jumpingTimer = new Date().getTime();
+    }
   }
 
   this.leftClick = function(){
@@ -69,6 +73,11 @@ function Player(){
       var pointY = Math.floor((this.getArmOriginYGlobal() - deltaY * i)/64);
       if(map.mapArray[pointY][pointX] == -1) {
         map.mapArray[pointY][pointX] = 2;
+        // Check if we are colliding now, if we are... remove it
+        if(map.collide(this.getRect())) {
+          map.mapArray[pointY][pointX] = -1;
+          continue;
+        }
         break;
       }
     }
