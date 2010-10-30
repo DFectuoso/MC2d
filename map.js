@@ -138,12 +138,35 @@ function Map(sprite, screenSizeX,screenSizeY){
     }
   }
 
+  this.addOre = function(xTop,xBottom,id, randomVar){
+    for(var i = xTop; i < xBottom-1; i++){
+      for(var j = 1; j < MAP_WIDTH - 1; j++){
+        if(this.mapArray[i][j] == 1 && Math.random() < randomVar) { 
+          this.mapArray[i][j] = id; 
+          if(this.mapArray[i+1][j+1] == 1) this.mapArray[i+1][j+1] = id; 
+          if(this.mapArray[i  ][j+1] == 1) this.mapArray[i  ][j+1] = id; 
+          if(this.mapArray[i-1][j+1] == 1) this.mapArray[i-1][j+1] = id; 
+          if(this.mapArray[i+1][j  ] == 1) this.mapArray[i+1][j  ] = id; 
+          if(this.mapArray[i-1][j  ] == 1) this.mapArray[i-1][j  ] = id; 
+          if(this.mapArray[i+1][j-1] == 1) this.mapArray[i+1][j-1] = id; 
+          if(this.mapArray[i  ][j-1] == 1) this.mapArray[i  ][j-1] = id; 
+          if(this.mapArray[i-1][j-1] == 1) this.mapArray[i-1][j-1] = id; 
+        }
+      }
+    }
+  }
+
   this.generateMap = function(){
     this.generateRandomMap();
     this.updateAll();
     this.updateLandLine();
     this.addLava();
     this.addStone();
+    this.addOre(100,256,34, 0.020/2);// carbon
+    this.addOre(100,256,33, 0.015/2);// iron
+    this.addOre(140,256,32, 0.010/2);// gold 
+    this.addOre(180,256,50, 0.002/2);// diamond
+    this.addOre(180,256,51, 0.008/2);// red 
     this.updateGrass();
   }
  
