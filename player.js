@@ -8,8 +8,8 @@ function Player(){
   this.jumpingTimer = "";
   this.velY = 0;
   this.acelY = 5;
-  this.x = 528;
-  this.y = 128;
+  this.x = 200;
+  this.y = 64*100;
   this.img = new Image();
   this.img.src = "char.png";
   this.lookingRight = true;

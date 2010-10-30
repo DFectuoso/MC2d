@@ -82,6 +82,27 @@ Now it working, and almost everyone has left, 11:27 and there < 5 people in the 
 Left the jam, with the hability to put tiles on left and right of the character, with the mouse, poiting. It feels like a sanbox, this is going to be an epic weekend.
 I need to refactor that so it looks in a line of where you are poiting, but man, its WORKING. You can build something, that is nice.
 
+Day 2: Friday afternoon. Getting after work, the place is packed, can't find a good place to hack, but lets do it anyway.
+The 2 big things to work on, generating the map and getting a good selection of the tile you are poiting to(up to 3 tiles away from you).
+
+I'll work on the map, then on getting the mine/build thing going on better.
+
+The idea with the map is to:
+-> Build a automata that generates a random map.
+-> It will update some times with its logic
+-> Render it, i will need to be able to move anywhere, that is but i'll make a function that moves you everwhere.
+
+2 hours later now===
+The map is perfect for a first run at it, can't wait to explore it!!! Its looking AWESOMe.
+
+I notice the game slows down/up depending on how many sprites i am rendering on screen(and the size of the canvas) will probably need to do something about it.
+Since the map is in good shape, its time to send right click/left click, find the correct target and start creating stuff =D
+
+=========================================
+
+
+
+
 
 
 

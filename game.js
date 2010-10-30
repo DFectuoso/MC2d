@@ -12,8 +12,8 @@ var map;
 var player;
 
 $(document).ready(function () {
-  map = new Map(new Sprite('textures.png'), $(window).width(), $(window).height());
   player = new Player();
+  map = new Map(new Sprite('textures.png'), $(window).width(), $(window).height());
 
   preloadImages.onComplete = function(){
     startGame();
@@ -72,5 +72,5 @@ function processGame(){
   move();
   controls();
   draw();
-  setTimeout("processGame();", 66);
+  setTimeout("processGame();", 1);
 }
