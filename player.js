@@ -16,47 +16,62 @@ function Player(){
 
   preloadImages.queue_images([this.img.src]);
 
-  this.rightClick = function(){
-    var screenReadyX = this.x - map.screenX;
-    var screenReadyY = this.y - map.screenY; 
+  this.getArmOriginXGlobal = function(){
     var widthArm =  4;
+    var screenReadyX = this.x;
+    return screenReadyX + deltaArm + deltaHead + widthArm;
+  }
+
+  this.getArmOriginYGlobal = function(){
     var heightHead = 10;
-    var armXOrigin = screenReadyX + deltaArm + deltaHead + widthArm;
-    var armYOrigin = screenReadyY + heightHead * 4 + deltaArm;
+    var screenReadyY = this.y; 
+    return screenReadyY + heightHead * 4 + deltaArm;
+  }
+
+  this.getArmOriginX = function(){
+    var widthArm =  4;
+    var screenReadyX = this.x - map.screenX;
+    return screenReadyX + deltaArm + deltaHead + widthArm;
+  }
+
+  this.getArmOriginY = function(){
+    var heightHead = 10;
+    var screenReadyY = this.y - map.screenY; 
+    return screenReadyY + heightHead * 4 + deltaArm;
+  }
+
+  this.rightClick = function(){
+    var armOriginX = this.getArmOriginX();
+    var armOriginY = this.getArmOriginY();
     
-    var angle = Math.atan2(armYOrigin - mousey,armXOrigin - mousex) * 180/Math.PI;
-    console.log(angle)
-    if (angle>0 && angle < 90)
-      map.mapArray[Math.floor(this.y/64)][Math.floor(this.x/64) - 1] = -1; 
-    if (angle>90 && angle < 180)
-      map.mapArray[Math.floor(this.y/64)][Math.floor(this.x/64) + 1] = -1; 
-    if (angle<0 && angle > -90)
-      map.mapArray[Math.floor(this.y/64) + 1][Math.floor(this.x/64) - 1] = -1; 
-    if (angle<-90 && angle > -180)
-      map.mapArray[Math.floor(this.y/64) + 1][Math.floor(this.x/64) + 1] = -1; 
+    var angle = Math.atan2(armOriginY - mousey,armOriginX - mousex) * 180/Math.PI;
+    var deltaX = Math.cos(angle*Math.PI/180) * 64;
+    var deltaY = Math.sin(angle*Math.PI/180) * 64;
+    for(var i = 0; i < 5; i++){
+      var pointX = Math.floor((this.getArmOriginXGlobal() - deltaX * i)/64);
+      var pointY = Math.floor((this.getArmOriginYGlobal() - deltaY * i)/64);
+      if(map.mapArray[pointY][pointX] != -1) {
+        map.mapArray[pointY][pointX] = -1;
+        break;
+      }
+    }
   }
 
   this.leftClick = function(){
-    var screenReadyX = this.x - map.screenX;
-    var screenReadyY = this.y - map.screenY; 
-    var widthArm =  4;
-    var heightHead = 10;
-    var armXOrigin = screenReadyX + deltaArm + deltaHead + widthArm;
-    var armYOrigin = screenReadyY + heightHead * 4 + deltaArm;
+    var armOriginX = this.getArmOriginX();
+    var armOriginY = this.getArmOriginY();
     
-    var angle = Math.atan2(armYOrigin - mousey,armXOrigin - mousex) * 180/Math.PI;
-    console.log(angle)
-    if (angle>0 && angle < 90)
-      map.mapArray[Math.floor(this.y/64)][Math.floor(this.x/64) - 1] = 3; 
-    if (angle>90 && angle < 180)
-      map.mapArray[Math.floor(this.y/64)][Math.floor(this.x/64) + 1] = 3; 
-    if (angle<0 && angle > -90)
-      map.mapArray[Math.floor(this.y/64) + 1][Math.floor(this.x/64) - 1] = 3; 
-    if (angle<-90 && angle > -180)
-      map.mapArray[Math.floor(this.y/64) + 1][Math.floor(this.x/64) + 1] = 3; 
-    // Get the nearest thing, outside of us, that we are position
-    // if its not 3
-    // MAKE THAT B#@!#@! 3
+    var angle = Math.atan2(armOriginY - mousey,armOriginX - mousex) * 180/Math.PI;
+    var deltaX = Math.cos(angle*Math.PI/180) * 64;
+    var deltaY = Math.sin(angle*Math.PI/180) * 64;
+    for(var i = 3; i > 0; i--){
+      var pointX = Math.floor((this.getArmOriginXGlobal() - deltaX * i)/64);
+      var pointY = Math.floor((this.getArmOriginYGlobal() - deltaY * i)/64);
+      if(map.mapArray[pointY][pointX] == -1) {
+        map.mapArray[pointY][pointX] = 2;
+        break;
+      }
+    }
   }
 
   this.getRect = function(x,y){
