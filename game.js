@@ -54,6 +54,7 @@ function drawBlueSky(){
 function move(){
   player.fall(map);
   map.moveCamaraForPlayerMoveTo(player.x,player.y);
+  map.updateGrass();
 }
 
 function draw(){
