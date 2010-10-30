@@ -16,9 +16,29 @@ function Player(){
 
   preloadImages.queue_images([this.img.src]);
 
+  this.rightClick = function(){
+    var screenReadyX = this.x - map.screenX;
+    var screenReadyY = this.y - map.screenY; 
+    var widthArm =  4;
+    var heightHead = 10;
+    var armXOrigin = screenReadyX + deltaArm + deltaHead + widthArm;
+    var armYOrigin = screenReadyY + heightHead * 4 + deltaArm;
+    
+    var angle = Math.atan2(armYOrigin - mousey,armXOrigin - mousex) * 180/Math.PI;
+    console.log(angle)
+    if (angle>0 && angle < 90)
+      map.mapArray[Math.floor(this.y/64)][Math.floor(this.x/64) - 1] = -1; 
+    if (angle>90 && angle < 180)
+      map.mapArray[Math.floor(this.y/64)][Math.floor(this.x/64) + 1] = -1; 
+    if (angle<0 && angle > -90)
+      map.mapArray[Math.floor(this.y/64) + 1][Math.floor(this.x/64) - 1] = -1; 
+    if (angle<-90 && angle > -180)
+      map.mapArray[Math.floor(this.y/64) + 1][Math.floor(this.x/64) + 1] = -1; 
+  }
+
   this.leftClick = function(){
-    var screenReadyX = this.x - screenX;
-    var screenReadyY = this.y - screenY; 
+    var screenReadyX = this.x - map.screenX;
+    var screenReadyY = this.y - map.screenY; 
     var widthArm =  4;
     var heightHead = 10;
     var armXOrigin = screenReadyX + deltaArm + deltaHead + widthArm;

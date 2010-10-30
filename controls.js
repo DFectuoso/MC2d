@@ -61,6 +61,16 @@ function mouseMove(ev){
   }
 }
 
-function mouseClick(ev){
- player.leftClick(); 
+function mouseClick(e) { 
+  var rightclick = false;
+  e = e || window.event;
+  if (e.which)
+    rightclick = (e.which == 3);
+  else if (e.button)
+    rightclick = (e.button == 2);
+  if(rightclick){
+    player.rightClick();
+    return true;
+  } else  
+    player.leftClick(); 
 }
