@@ -10,10 +10,12 @@ var mousey = 0;
 var canvas;
 var map;
 var player;
+var sprite;
 
 $(document).ready(function () {
   player = new Player();
-  map = new Map(new Sprite('textures.png'), $(window).width(), $(window).height());
+  sprite = new Sprite('textures.png')
+  map = new Map(sprite, $(window).width(), $(window).height());
 
   preloadImages.onComplete = function(){
     startGame();
@@ -61,6 +63,7 @@ function draw(){
   drawBlueSky();
   map.draw();
   player.draw(map.screenX,map.screenY);
+  drawHUD();
 }
 
 function controls(){

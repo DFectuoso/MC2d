@@ -27,6 +27,30 @@ var controlsUp = function(ev) {
 var controlsDown = function(ev) {
   arrows=((ev.which)||(ev.keyCode));
   switch(arrows) {
+    case 49:
+      selectItem(0);
+      break;
+    case 50:
+      selectItem(1);
+      break;
+    case 51:
+      selectItem(2);
+      break;
+    case 52:
+      selectItem(3);
+      break;
+    case 53:
+      selectItem(4);
+      break;
+    case 54:
+      selectItem(5);
+      break;
+    case 55:
+      selectItem(6);
+      break;
+    case 56:
+      selectItem(7);
+      break;
     case 13:
       ENTER_KEY = true;
       break;
