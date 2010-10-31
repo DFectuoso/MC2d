@@ -51,6 +51,8 @@ function Player(){
       var pointX = Math.floor((this.getArmOriginXGlobal() - deltaX * i)/64);
       var pointY = Math.floor((this.getArmOriginYGlobal() - deltaY * i)/64);
       if(map.mapArray[pointY][pointX] != -1) {
+        if (map.mapArray[pointY][pointX] == 3) map.mapArray[pointY][pointX] = 2;
+        addOneToItemWithId(map.mapArray[pointY][pointX])
         map.mapArray[pointY][pointX] = -1;
         break;
       }
@@ -74,7 +76,7 @@ function Player(){
       if(map.mapArray[pointY][pointX] == -1) {
         map.mapArray[pointY][pointX] = selectedItem().id;
         // Check if we are colliding now, if we are... remove it
-        if(map.collide(this.getRect())) {
+        if(map.collide(this.getRect()) || !removeOneToItemWithId(selectedItem().id)) {
           map.mapArray[pointY][pointX] = -1;
           continue;
         }

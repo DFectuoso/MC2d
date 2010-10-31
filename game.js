@@ -4,6 +4,7 @@ var RIGHT_KEY = false;
 var UP_KEY = false;
 var DOWN_KEY = false;
 var ENTER_KEY= false;
+var RIGHT_CLICK = false;
 var mousex = 0;
 var mousey = 0;
 
@@ -44,6 +45,7 @@ function startGame(){
     document.onkeyup  = controlsUp;
     document.onkeydown  = controlsDown;
     document.onmousedown = mouseClick;
+    document.onmouseup = mouseUnClick;
     document.onmousemove = mouseMove;
     processGame();
 }
@@ -70,6 +72,7 @@ function controls(){
   if(UP_KEY) player.jump();
   if(RIGHT_KEY) player.moveRight();
   if(LEFT_KEY) player.moveLeft();
+  if(RIGHT_CLICK) player.rightClick();
 }
 
 function processGame(){

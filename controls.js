@@ -93,8 +93,22 @@ function mouseClick(e) {
   else if (e.button)
     rightclick = (e.button == 2);
   if(rightclick){
+    RIGHT_CLICK = true;
     player.rightClick();
     return true;
   } else  
     player.leftClick(); 
+}
+
+function mouseUnClick(e){
+  var rightclick = false;
+  e = e || window.event;
+  if (e.which)
+    rightclick = (e.which == 3);
+  else if (e.button)
+    rightclick = (e.button == 2);
+  if(rightclick){
+    RIGHT_CLICK = false;
+    return true;
+  } 
 }
