@@ -88,7 +88,7 @@ function controls(){
   if(UP_KEY) player.jump();
   if(RIGHT_KEY) player.moveRight();
   if(LEFT_KEY) player.moveLeft();
-  if(RIGHT_CLICK) player.rightClick();
+  if(RIGHT_CLICK) player.mine();
 }
 
 function processGame(){

@@ -94,10 +94,9 @@ function mouseClick(e) {
     rightclick = (e.button == 2);
   if(rightclick){
     RIGHT_CLICK = true;
-    player.rightClick();
     return true;
   } else  
-    player.leftClick(); 
+    player.hit(); 
 }
 
 function mouseUnClick(e){
@@ -109,6 +108,9 @@ function mouseUnClick(e){
     rightclick = (e.button == 2);
   if(rightclick){
     RIGHT_CLICK = false;
+    player.mineTileX = -1;
+    player.mineTileY = -1;
+    player.mineProgress = 0;
     return true;
   } 
 }

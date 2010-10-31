@@ -187,12 +187,19 @@ function Map(sprite, screenSizeX,screenSizeY){
 
     for(var i = firstTileTop; i < lastTileBottom; i++){
       for (var j = firstTileLeft; j < lastTileRight; j++){
-        if(this.mapArray[i][j] != -1 && (this.getOne(j+1,i) == 0 || this.getOne(j-1,i) == 0 || this.getOne(j,i+1) == 0 || this.getOne(j,i-1) == 0) )
+        if(this.mapArray[i][j] != -1 && (this.getOne(j+1,i) == 0 || this.getOne(j-1,i) == 0 || this.getOne(j,i+1) == 0 || this.getOne(j,i-1) == 0) ){
           this.sprite.draw(this.mapArray[i][j], (j - firstTileLeft) * 64 - this.screenX % 64, (i - firstTileTop) * 64 - this.screenY % 64);
-        else if(this.mapArray[i][j] != -1){
+
+          if(i == player.mineTileY && j == player.mineTileX && player.mineProgress> 0){
+            var percentile = Math.floor(player.mineProgress / MINE_PROGRESS * 10);
+            percentile = Math.min(percentile,9);
+            this.sprite.draw(240 + percentile, (j - firstTileLeft) * 64 - this.screenX % 64, (i - firstTileTop) * 64 - this.screenY % 64);
+          }
+       } else if(this.mapArray[i][j] != -1){
           canvas.fillColor("rgb(33,33,33)");
           canvas.fillRect((j-firstTileLeft)*64 - this.screenX % 64,(i-firstTileTop) * 64 - this.screenY % 64,64,64)
         }
+ 
       }
     }
   }; 

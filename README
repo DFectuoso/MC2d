@@ -144,3 +144,20 @@ Usually I would say that being in a hack-a-thon makes me code faster or get bett
 
 In another note: after 3 days, I feel tired, but I don't want to go to sleep, I would like to keep coding =)
 
+============================
+Wow, I had a impossible time waking up, its almost 2:00 pm and I have to leave at 6:00pm, that means: 4 hours to develop 2 features: Slow mining and Mobs.
+Its really a lot, and mobs might end up just being decorative or something.
+
+(Also there was a problem with a random crazy guy @ the dojo and there is a police car outside and people dealing with this, weird)
+Ok so lets do it, the idea is to:
+[DONE]->Change the player mouseclicked functions to be hit and build
+->hit will store the selected X and Y and a progress.
+->if the stored != the actual, store it and reset progress
+->if progress > resistance = call the actual function
+->if not, add progress
+Once we have that, we might think of rendering it diferently(overlay the effects)
+
+After we get that, create a mob class, it can be rendered and instanciated
+Then make it wanred around
+
+LETS DO IT NOAAAA

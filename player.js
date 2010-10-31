@@ -3,7 +3,12 @@ var PLAYER_RECT_WIDTH = 24;
 var PLAYER_RECT_HEIGHT= 118;;
 var deltaHead = 3; 
 var deltaArm = 8;
+var MINE_PROGRESS = 30;//30
 function Player(){
+  this.mineTileX = 0;
+  this.mineTileY = 0;
+  this.mineProgress = 0;
+  this.mineAngle = 0;
 
   this.jumpingTimer = "";
   this.velY = 0;
@@ -40,7 +45,7 @@ function Player(){
     return screenReadyY + heightHead * 4 + deltaArm;
   }
 
-  this.rightClick = function(){
+  this.mine= function(){
     var armOriginX = this.getArmOriginX();
     var armOriginY = this.getArmOriginY();
     
@@ -51,6 +56,22 @@ function Player(){
       var pointX = Math.floor((this.getArmOriginXGlobal() - deltaX * i)/64);
       var pointY = Math.floor((this.getArmOriginYGlobal() - deltaY * i)/64);
       if(map.mapArray[pointY][pointX] != -1) {
+        // We have found a target, lets either start, continue or finish mining
+        // Should we start?
+        if(pointX != this.mineTileX || pointY != this.mineTileY){
+          this.mineTileY = pointY;
+          this.mineTileX = pointX;
+          this.mineProgress = 0;
+          break;
+        }
+        // Should we continue?
+        if(this.mineProgress < MINE_PROGRESS){
+          this.mineProgress++;
+          break;
+        }
+        this.mineProgress = 0; 
+        this.mineTileY = -1;
+        this.mineTileX = -1;
         if (map.mapArray[pointY][pointX] == 3) map.mapArray[pointY][pointX] = 2;
         addOneToItemWithId(map.mapArray[pointY][pointX])
         map.mapArray[pointY][pointX] = -1;
@@ -63,7 +84,7 @@ function Player(){
     }
   }
 
-  this.leftClick = function(){
+  this.hit = function(){
     var armOriginX = this.getArmOriginX();
     var armOriginY = this.getArmOriginY();
     
@@ -201,9 +222,15 @@ function Player(){
     var armXOrigin = screenReadyX + deltaArm + deltaHead + widthArm;
     var armYOrigin = screenReadyY + heightHead * 4 + deltaArm;
     var angle = Math.atan2(armYOrigin - mousey,armXOrigin - mousex);
-    var m1 = Matrix().translate(armXOrigin,armYOrigin).rotate(angle).rotate(Math.PI/2);
+    this.mineAngle = (this.mineProgress > 0 && this.mineProgress % 5 == 0)?Math.random():0;
+    var m1 = Matrix().translate(armXOrigin,armYOrigin).rotate(angle).rotate(Math.PI/2).rotate(this.mineAngle/2);
     var self = this;
     canvas.withTransform(m1, function(){
+      if(self.lookingRight)
+        canvas.withTransform(Matrix().translate(30,0).rotate(Math.PI/4), function(){sprite.draw(224, -widthArm,0);})
+      if(!self.lookingRight)
+        canvas.withTransform(Matrix().translate(-20,0).rotate(Math.PI/4), function(){sprite.draw(225, -widthArm,0);})
+
       canvas.drawImage(self.img, sxArm, syArm, widthArm, heightArm,-widthArm,0,widthArm * 4,heightArm * 4);
     });
  
