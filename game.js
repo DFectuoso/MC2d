@@ -51,8 +51,24 @@ function startGame(){
 }
 
 function drawBlueSky(){
-  canvas.fillColor("rgb(118,173,246)");
-  canvas.fillRect(0,0,$(window).width(),$(window).height());
+  var transitionY = 110*64;
+  var screenY = map.screenY;
+  var screenHeight = $(window).width();
+
+  var blueHeight = Math.min($(window).width(), transitionY - screenY);
+
+  var skyGradient = canvas.createLinearGradient(0, 0, $(window).width(), blueHeight);
+  skyGradient.addColorStop(0, "white");
+  skyGradient.addColorStop(1, "rgb(118,173,246)"); 
+  canvas.context().fillStyle = skyGradient;
+  canvas.fillRect(0,0,$(window).width(),blueHeight);
+
+
+  var groundGradient = canvas.createLinearGradient(0, 0, 0, $(window).height() -  blueHeight);
+  groundGradient.addColorStop(0, "rgb(66,66,66)");
+  groundGradient.addColorStop(1, "rgb(33,33,33)"); 
+  canvas.context().fillStyle = groundGradient;
+  canvas.fillRect(0,blueHeight,$(window).width(),$(window).height() - blueHeight);
 }
 
 function move(){
