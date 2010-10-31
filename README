@@ -130,3 +130,17 @@ Inventory
 Today has been a crazy day at the TIGJam, got to sit with a whole lot of incredible people and that helped me move forward faster.
 So far I got mist of war, map, and part of the inventory done.
 Now you can place any kind of item, next step is to have actual numbers
+
+Night of the day 3:
+Wow, this was an amazing day, I started with little motivation because I tough that the game was already in a good state and adding something that would really improve it would be really hard.
+But this started great by adding rocks, ores, and lava, better collision detection, better jumping and then things started to go better and better with inventory, better diging and cool background
+All and all I am pretty exited to release this to the world tomorrow, of course I could add a ton of other stuff(like trees, crafting, mobs, etc)
+
+Tomorrow the plan is to start by making slow mining(hit 4 times to get it) with some sort of animation, add a pickaxe and then mobs. Thats pretty much all I think I will be able to add.
+A very interesting side effect of doing a full screen canvas that autorisizes on change is that the zoom of the browser works, and that is AWESOME, really INCREDIBLE
+
+Its almost time to sleep after a great day of codding, I got great advice from everyone in my table @ TIG jam and a lot of motivation.
+Usually I would say that being in a hack-a-thon makes me code faster or get better ideas and features, but today was a incredible demonstration that this happens, and when it does, great things happen.
+
+In another note: after 3 days, I feel tired, but I don't want to go to sleep, I would like to keep coding =)
+
