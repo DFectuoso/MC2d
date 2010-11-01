@@ -12,12 +12,16 @@ var canvas;
 var map;
 var player;
 var sprite;
+var creep = new Array();
+var creepCount = 100;
 
 $(document).ready(function () {
   player = new Player();
   sprite = new Sprite('textures.png')
   map = new Map(sprite, $(window).width(), $(window).height());
-
+  for(var i = 0; i < creepCount; i++){
+    creep[i] = new Creep();
+  }
   preloadImages.onComplete = function(){
     startGame();
   }
@@ -73,6 +77,9 @@ function drawBlueSky(){
 
 function move(){
   player.fall(map);
+  for(var i = 0; i < creepCount; i++){
+    creep[i].fall(map);
+  }
   map.moveCamaraForPlayerMoveTo(player.x,player.y);
   map.updateGrass();
 }
@@ -80,6 +87,9 @@ function move(){
 function draw(){
   drawBlueSky();
   map.draw();
+  for(var i = 0; i < creepCount; i++){
+    creep[i].draw(map.screenX,map.screenY);
+  }
   player.draw(map.screenX,map.screenY);
   drawHUD();
 }
@@ -89,6 +99,9 @@ function controls(){
   if(RIGHT_KEY) player.moveRight();
   if(LEFT_KEY) player.moveLeft();
   if(RIGHT_CLICK) player.mine();
+  for(var i = 0; i < creepCount; i++){
+    creep[i].walk();
+  }
 }
 
 function processGame(){

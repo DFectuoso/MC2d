@@ -161,3 +161,13 @@ After we get that, create a mob class, it can be rendered and instanciated
 Then make it wanred around
 
 LETS DO IT NOAAAA
+==== WOW 2:45 to go and i finished slow mining, its time to do creepers and first spawn
+
+=> Make the map 2* wide
+=> Make a function called spawn player, it takes you to the middle, falling
+=> Make a class called creeper, its starts with the manelik texture
+=> Paint it near the player
+=> Make a explode function, it destroys a floodfill/kill player(calls respawn
+=> Make him jump/move around randomly.
+
+LETS DO IT DO IT DO IT DO IT NOW

@@ -3,7 +3,7 @@ var PLAYER_RECT_WIDTH = 24;
 var PLAYER_RECT_HEIGHT= 118;;
 var deltaHead = 3; 
 var deltaArm = 8;
-var MINE_PROGRESS = 30;//30
+var MINE_PROGRESS = 0;//30
 function Player(){
   this.mineTileX = 0;
   this.mineTileY = 0;
@@ -233,6 +233,5 @@ function Player(){
 
       canvas.drawImage(self.img, sxArm, syArm, widthArm, heightArm,-widthArm,0,widthArm * 4,heightArm * 4);
     });
- 
   }; 
 }
