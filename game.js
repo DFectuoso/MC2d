@@ -13,12 +13,13 @@ var map;
 var player;
 var sprite;
 var creep = new Array();
-var creepCount = 100;
+var creepCount = 50;
 
 $(document).ready(function () {
   player = new Player();
   sprite = new Sprite('textures.png')
   map = new Map(sprite, $(window).width(), $(window).height());
+  player.spawn();
   for(var i = 0; i < creepCount; i++){
     creep[i] = new Creep();
   }

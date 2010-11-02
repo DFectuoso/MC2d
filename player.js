@@ -3,8 +3,14 @@ var PLAYER_RECT_WIDTH = 24;
 var PLAYER_RECT_HEIGHT= 118;;
 var deltaHead = 3; 
 var deltaArm = 8;
-var MINE_PROGRESS = 0;//30
+var MINE_PROGRESS =30;//30
 function Player(){
+  this.getRect = function(x,y){
+    if(x==null) x = this.x;
+    if(y==null) y = this.y;
+    return new Rect(x + deltaHead,y,PLAYER_RECT_WIDTH,PLAYER_RECT_HEIGHT);
+  }
+
   this.mineTileX = 0;
   this.mineTileY = 0;
   this.mineProgress = 0;
@@ -13,8 +19,19 @@ function Player(){
   this.jumpingTimer = "";
   this.velY = 0;
   this.acelY = 5;
-  this.x = 200;
-  this.y = 64*100;
+
+  this.x = 256*64;
+  this.y = 90* 64;
+  this.spawn = function(){
+    //if(!map.collideBottom(this.getRect(this.x,this.y+1)) && this.jumpingTimer == ""){
+      this.x = 256*64;
+      this.y = 90* 64;
+      map.screenX = this.x - 400;
+      map.screenY = this.y - 400;
+      this.velY = 8;
+      this.jumpingTimer = new Date().getTime();
+    //}
+  }
   this.img = new Image();
   this.img.src = "char.png";
   this.lookingRight = true;
@@ -25,6 +42,13 @@ function Player(){
     var widthArm =  4;
     var screenReadyX = this.x;
     return screenReadyX + deltaArm + deltaHead + widthArm;
+  }
+
+  this.checkFall = function (){
+     if(!map.collideBottom(this.getRect(this.x,this.y+1)) && this.jumpingTimer == ""){
+       this.velY = 8;
+       this.jumpingTimer = new Date().getTime();
+     }
   }
 
   this.getArmOriginYGlobal = function(){
@@ -105,13 +129,6 @@ function Player(){
       }
     }
   }
-
-  this.getRect = function(x,y){
-    if(x==null) x = this.x;
-    if(y==null) y = this.y;
-    return new Rect(x + deltaHead,y,PLAYER_RECT_WIDTH,PLAYER_RECT_HEIGHT);
-  }
-
   this.fall = function(map){
     if (this.jumpingTimer == "") return;
     this.velY -= this.acelY;
